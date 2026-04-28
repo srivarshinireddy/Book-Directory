@@ -113,3 +113,4 @@
     </div>
 </body>
 </html>
+<script>document.getElementById('title').value = 'The Great Gatsby'; document.getElementById('price').value = '10.99'; document.getElementById('author').selectedIndex = 1;</script>

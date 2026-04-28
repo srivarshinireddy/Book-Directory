@@ -103,8 +103,13 @@ public String saveBook(@ModelAttribute("book") Book book, Model model) {
         </div>
         
         <div style="text-align: center; margin: 20px 0;">
-            <img src="screenshot_add.png" alt="Add New Book Form" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 1: Application displaying the "Add New Book" form</p>
+            <img src="screenshot_empty_form.png" alt="Add New Book Form (Empty)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 1: Application displaying the "Add New Book" empty form</p>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="screenshot_form_data.png" alt="Add New Book Form (With Data)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 2: Form filled with data before submission</p>
         </div>
 
         <h3>2.3 Read Operation</h3>
@@ -118,8 +123,8 @@ public interface BookRepository extends JpaRepository&lt;Book, Long&gt; {
         </div>
 
         <div style="text-align: center; margin: 20px 0;">
-            <img src="screenshot_list.png" alt="Book Directory List" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 2: Application displaying the list of all books and authors</p>
+            <img src="screenshot_initial_list.png" alt="Book Directory List (Initial)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 3: Application displaying the initial list of all books and authors</p>
         </div>
 
         <div class="page-break"></div>
@@ -136,8 +141,8 @@ public String updateBook(@PathVariable("id") Long id, @ModelAttribute("book") Bo
         </div>
 
         <div style="text-align: center; margin: 20px 0;">
-            <img src="screenshot_edit.png" alt="Edit Book Form" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 3: Application displaying the "Edit Book" form with pre-filled data</p>
+            <img src="screenshot_updated_list.png" alt="Updated Book List" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 4: Updated list reflecting the newly added entity</p>
         </div>
     </div>
 
