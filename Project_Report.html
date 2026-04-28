@@ -101,16 +101,6 @@ public String saveBook(@ModelAttribute("book") Book book, Model model) {
     }
 }</code></pre>
         </div>
-        
-        <div style="text-align: center; margin: 20px 0;">
-            <img src="screenshot_empty_form.png" alt="Add New Book Form (Empty)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 1: Application displaying the "Add New Book" empty form</p>
-        </div>
-
-        <div style="text-align: center; margin: 20px 0;">
-            <img src="screenshot_form_data.png" alt="Add New Book Form (With Data)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 2: Form filled with data before submission</p>
-        </div>
 
         <h3>2.3 Read Operation</h3>
         <p>A JSP view (<code>list.jsp</code>) lists all entities. To satisfy the custom query requirement, a <code>JOIN FETCH</code> query was implemented in the repository to retrieve books and their authors in a single SQL inner join.</p>
@@ -120,11 +110,6 @@ public interface BookRepository extends JpaRepository&lt;Book, Long&gt; {
     @Query("SELECT b FROM Book b JOIN FETCH b.author")
     List&lt;Book&gt; findAllBooksWithAuthors();
 }</code></pre>
-        </div>
-
-        <div style="text-align: center; margin: 20px 0;">
-            <img src="screenshot_initial_list.png" alt="Book Directory List (Initial)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 3: Application displaying the initial list of all books and authors</p>
         </div>
 
         <div class="page-break"></div>
@@ -140,9 +125,29 @@ public String updateBook(@PathVariable("id") Long id, @ModelAttribute("book") Bo
 }</code></pre>
         </div>
 
+        <div class="page-break"></div>
+
+        <h3>2.5 Application Data Flow Screenshots</h3>
+        <p>The following screenshots demonstrate the full workflow of the application:</p>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="screenshot_initial_list.png" alt="Book Directory List (Initial)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 1: Initial list of 10 books</p>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="screenshot_empty_form.png" alt="Add New Book Form (Empty)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 2: Empty form to add a new book</p>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="screenshot_form_data.png" alt="Add New Book Form (With Data)" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 3: Form filled with data before submission</p>
+        </div>
+
         <div style="text-align: center; margin: 20px 0;">
             <img src="screenshot_updated_list.png" alt="Updated Book List" style="max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 4: Updated list reflecting the newly added entity</p>
+            <p style="color: #7f8c8d; font-style: italic; margin-top: 10px;">Figure 4: Updated list reflecting the newly added 11th book</p>
         </div>
     </div>
 

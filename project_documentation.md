@@ -30,6 +30,18 @@ The database is an in-memory H2 database. Data is populated automatically on sta
 - **View**: Uses the same `form.jsp` view, making it reusable. The form dynamically populates with the existing book's details.
 - **Controller**: `GET /books/edit/{id}` displays the form. `POST /books/update/{id}` processes the update request and saves the updated entity.
 
+### Application Data Flow Screenshots
+The following screenshots demonstrate the full workflow of the application:
+1. **Initial List:** Showing 10 books.
+![Initial List](screenshot_initial_list.png)
+2. **Empty Form:** Ready to add a new book.
+![Empty Form](screenshot_empty_form.png)
+3. **Form With Data:** Filled with details before submission.
+![Form With Data](screenshot_form_data.png)
+4. **Updated List:** Showing 11 books.
+![Updated List](screenshot_updated_list.png)
+
+
 ## 3. Testing
 Unit tests were implemented using JUnit 5 and Mockito.
 - `LibraryServiceTest` tests the business logic and exception handling without hitting the database, mocking the repository layer.
