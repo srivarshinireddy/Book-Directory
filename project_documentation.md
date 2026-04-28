@@ -40,5 +40,4 @@ Unit tests were implemented using JUnit 5 and Mockito.
 - **JSP view mapping in Spring Boot**: Spring Boot prefers Thymeleaf over JSP. To use JSP, `tomcat-embed-jasper` and JSTL dependencies had to be configured correctly in `pom.xml`, and the view resolver prefix/suffix properties were set in `application.properties`.
 
 ## 5. Github URL
-*(User to replace with their GitHub repository URL)*
-https://github.com/username/repository-name
+https://github.com/srivarshinireddy/Book-Directory
