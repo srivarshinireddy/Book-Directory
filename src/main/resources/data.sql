@@ -1,0 +1,21 @@
+INSERT INTO author (name, nationality) VALUES ('J.K. Rowling', 'British');
+INSERT INTO author (name, nationality) VALUES ('George R.R. Martin', 'American');
+INSERT INTO author (name, nationality) VALUES ('J.R.R. Tolkien', 'British');
+INSERT INTO author (name, nationality) VALUES ('Agatha Christie', 'British');
+INSERT INTO author (name, nationality) VALUES ('Stephen King', 'American');
+INSERT INTO author (name, nationality) VALUES ('Haruki Murakami', 'Japanese');
+INSERT INTO author (name, nationality) VALUES ('Gabriel Garcia Marquez', 'Colombian');
+INSERT INTO author (name, nationality) VALUES ('Isaac Asimov', 'American');
+INSERT INTO author (name, nationality) VALUES ('Arthur C. Clarke', 'British');
+INSERT INTO author (name, nationality) VALUES ('Jane Austen', 'British');
+
+INSERT INTO book (title, price, author_id) VALUES ('Harry Potter and the Sorcerer''s Stone', 19.99, 1);
+INSERT INTO book (title, price, author_id) VALUES ('A Game of Thrones', 22.50, 2);
+INSERT INTO book (title, price, author_id) VALUES ('The Hobbit', 15.00, 3);
+INSERT INTO book (title, price, author_id) VALUES ('And Then There Were None', 12.99, 4);
+INSERT INTO book (title, price, author_id) VALUES ('The Shining', 18.50, 5);
+INSERT INTO book (title, price, author_id) VALUES ('Norwegian Wood', 16.00, 6);
+INSERT INTO book (title, price, author_id) VALUES ('One Hundred Years of Solitude', 20.00, 7);
+INSERT INTO book (title, price, author_id) VALUES ('Foundation', 14.50, 8);
+INSERT INTO book (title, price, author_id) VALUES ('2001: A Space Odyssey', 17.25, 9);
+INSERT INTO book (title, price, author_id) VALUES ('Pride and Prejudice', 9.99, 10);

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot CRUD Application Project Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+        .screenshot-placeholder {
+            border: 2px dashed #bdc3c7;
+            background-color: #ecf0f1;
+            text-align: center;
+            padding: 50px 20px;
+            color: #7f8c8d;
+            font-weight: bold;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        ul {
+            margin-top: 5px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Project Report: Spring Boot CRUD Application</h1>
+    <p><strong>Student Name:</strong> [Your Name]</p>
+    <p><strong>Date:</strong> [Date]</p>
+
+    <div class="section">
+        <h2>1. Entity Relationship Design</h2>
+        <p>For this project, the entities chosen are <strong>Author</strong> and <strong>Book</strong>. The application models a library system where an author can write multiple books, and each book belongs to exactly one author.</p>
+        <ul>
+            <li><strong>Author Entity:</strong> Contains <code>id</code> (Primary Key), <code>name</code>, <code>nationality</code>, and a <code>@OneToMany</code> relationship mapping to the Book entity.</li>
+            <li><strong>Book Entity:</strong> Contains <code>id</code> (Primary Key), <code>title</code>, <code>price</code>, and a <code>@ManyToOne</code> relationship mapping to the Author entity.</li>
+        </ul>
+        <p>The JPA annotations <code>@Entity</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@OneToMany</code>, and <code>@ManyToOne</code> were used to properly define these database constraints and relationships.</p>
+    </div>
+
+    <div class="section">
+        <h2>2. Implementation Details & Operations</h2>
+
+        <h3>2.1 Populate Database</h3>
+        <p>An in-memory <strong>H2 Database</strong> was configured using <code>application.properties</code>. Data is initialized using a <code>data.sql</code> script which is automatically executed by Spring Boot on startup, inserting 10 sample records for both authors and books.</p>
+        <div class="code-block">
+<pre><code>// src/main/resources/data.sql excerpt
+INSERT INTO author (name, nationality) VALUES ('J.K. Rowling', 'British');
+INSERT INTO book (title, price, author_id) VALUES ('Harry Potter', 19.99, 1);
+// ... Total of 10 rows per table ...
+</code></pre>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h3>2.2 Create Operation</h3>
+        <p>A reusable JSP view (<code>form.jsp</code>) allows users to add new entities. The <code>LibraryController</code> handles the POST request, catching any <code>DataIntegrityViolationException</code> to gracefully handle integrity issues.</p>
+        <div class="code-block">
+<pre><code>@PostMapping
+public String saveBook(@ModelAttribute("book") Book book, Model model) {
+    try {
+        libraryService.saveBook(book);
+        return "redirect:/books";
+    } catch (DataIntegrityViolationException e) {
+        model.addAttribute("error", "Data integrity violation: Ensure all fields are valid.");
+        model.addAttribute("authors", libraryService.getAllAuthors());
+        return "form";
+    }
+}</code></pre>
+        </div>
+        
+        <div class="screenshot-placeholder">
+            [Insert Screenshot: Application displaying the "Add New Book" form]
+        </div>
+
+        <h3>2.3 Read Operation</h3>
+        <p>A JSP view (<code>list.jsp</code>) lists all entities. To satisfy the custom query requirement, a <code>JOIN FETCH</code> query was implemented in the repository to retrieve books and their authors in a single SQL inner join.</p>
+        <div class="code-block">
+<pre><code>@Repository
+public interface BookRepository extends JpaRepository&lt;Book, Long&gt; {
+    @Query("SELECT b FROM Book b JOIN FETCH b.author")
+    List&lt;Book&gt; findAllBooksWithAuthors();
+}</code></pre>
+        </div>
+
+        <div class="screenshot-placeholder">
+            [Insert Screenshot: Application displaying the list of all books and authors]
+        </div>
+
+        <div class="page-break"></div>
+
+        <h3>2.4 Update Operation</h3>
+        <p>The update operation utilizes the same <code>form.jsp</code>, pre-filling the existing entity's details. The controller saves the modified entity using JPA's save mechanism.</p>
+        <div class="code-block">
+<pre><code>@PostMapping("/update/{id}")
+public String updateBook(@PathVariable("id") Long id, @ModelAttribute("book") Book book) {
+    book.setId(id);
+    libraryService.saveBook(book);
+    return "redirect:/books";
+}</code></pre>
+        </div>
+
+        <div class="screenshot-placeholder">
+            [Insert Screenshot: Application displaying the "Edit Book" form with pre-filled data]
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Challenges Faced and Solutions</h2>
+        <ul>
+            <li><strong>Challenge:</strong> Handling Data Integrity Exceptions properly without causing the application to crash or display the default "Whitelabel Error Page".
+                <br><strong>Solution:</strong> A <code>try-catch</code> block was added in the Controller methods for POST requests. If an exception is caught, an error attribute is passed to the Model, and the form is returned with a descriptive error message displayed to the user using JSTL.</li>
+            <li><strong>Challenge:</strong> Configuring JSP in modern Spring Boot (version 3.2+). Spring Boot typically favors Thymeleaf.
+                <br><strong>Solution:</strong> The <code>tomcat-embed-jasper</code> dependency and modern Jakarta JSTL dependencies were manually added to the <code>pom.xml</code>, and the view resolver was properly mapped via the <code>application.properties</code> file.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. GitHub Repository</h2>
+        <p>The complete source code for this project is available on GitHub:</p>
+        <p><strong>URL:</strong> <a href="https://github.com/srivarshinireddy/Book-Directory">https://github.com/srivarshinireddy/Book-Directory</a></p>
+    </div>
+
+</body>
+</html>
