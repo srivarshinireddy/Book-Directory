@@ -69,7 +69,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Title</th>
                     <th>Price</th>
                     <th>Author Name</th>
@@ -78,9 +78,9 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="book" items="${books}">
+                <c:forEach var="book" items="${books}" varStatus="loop">
                     <tr>
-                        <td>${book.id}</td>
+                        <td>${loop.index + 1}</td>
                         <td>${book.title}</td>
                         <td>$${book.price}</td>
                         <td>${book.author.name}</td>
